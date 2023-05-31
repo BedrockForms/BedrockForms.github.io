@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minecraft Form Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Minecraft Form Builder</h1>
+  
+  <form id="form-builder">
+    <label for="form-title">Form Title:</label>
+    <input type="text" id="form-title" required>
+    
+    <label for="form-id">Form ID:</label>
+    <input type="text" id="form-id" required>
+    
+    <label for="form-body">Body Text:</label>
+    <textarea id="form-body" required></textarea>
+    
+    <div class="button-group">
+      <h2>Buttons:</h2>
+      <div id="buttons-container"></div>
+      <button type="button" id="add-button">Add Button</button>
+    </div>
+    
+    <button type="submit">Create Minecraft Form</button>
+  </form>
+
+  <div id="generated-json-container">
+    <h2>Generated JSON:</h2>
+    <textarea id="generated-json", rows="20" readonly></textarea>
+  </div>
+
+  <div class="content">
+    This website was created by Alexander aka. MiauMiez for <a href="https://axiscube.xyz/">AxiscubeXYZ</a>. 
+  </div>
+  <footer class="footer"></footer>
+
+
+  <script>
+    // Function to create a button container
+    function createButtonContainer() {
+      const buttonContainer = document.createElement('div');
+      buttonContainer.className = 'button-container';
+      
+      const buttonNameField = document.createElement('input');
+      buttonNameField.type = 'text';
+      buttonNameField.placeholder = 'Button Name';
+      buttonNameField.required = true;
+      
+      const iconField = document.createElement('input');
+      iconField.type = 'text';
+      iconField.placeholder = 'Icon Path';
+      
+      const actionsContainer = document.createElement('div');
+      actionsContainer.className = 'actions-container';
+      
+      const addAction = document.createElement('button');
+      addAction.textContent = 'Add Action';
+      addAction.type = 'button';
+      addAction.addEventListener('click', () => {
+        addNewAction(actionsContainer);
+      });
+      
+      buttonContainer.appendChild(buttonNameField);
+      buttonContainer.appendChild(iconField);
+      buttonContainer.appendChild(actionsContainer);
+      buttonContainer.appendChild(addAction);
+      
+      return buttonContainer;
+    }
+    
+    // Function to create an action container
+    function createActionContainer() {
+      const actionContainer = document.createElement('div');
+      actionContainer.className = 'action-container';
+      
+      const actionSelect = document.createElement('select');
+      const actionTypes = ['nothing', 'say', 'cmds', 'form', 'eval', 'cmd'];
+      actionTypes.forEach((type) => {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = type;
+        actionSelect.appendChild(option);
+      });
+      
+      const valueField = document.createElement('input');
+      valueField.type = 'text';
+      valueField.placeholder = 'Action Value';
+      
+      const removeAction = document.createElement('button');
+      removeAction.textContent = 'Remove';
+      removeAction.type = 'button';
+      removeAction.addEventListener('click', () => {
+        actionContainer.remove();
+      });
+      
+      actionContainer.appendChild(actionSelect);
+      actionContainer.appendChild(valueField);
+      actionContainer.appendChild(removeAction);
+      
+      return actionContainer;
+    }
+    
+    // Function to add a new action container to the button container
+    function addNewAction(actionsContainer) {
+      const newActionContainer = createActionContainer();
+      actionsContainer.appendChild(newActionContainer);
+    }
+    
+    // Function to add a new button container to the buttons container
+    function addButton() {
+      const buttonsContainer = document.getElementById('buttons-container');
+      const newButtonContainer = createButtonContainer();
+      buttonsContainer.appendChild(newButtonContainer);
+    }
+    
+    // Handle form submission
+    document.getElementById('form-builder').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formTitle = document.getElementById('form-title').value;
+      const formId = document.getElementById('form-id').value;
+      const formBody = document.getElementById('form-body').value;
+      
+      const buttonsContainer = document.getElementById('buttons-container');
+      const buttonContainers = buttonsContainer.getElementsByClassName('button-container');
+      
+      const formData = {};
+      formData[formId] = {
+        title: formTitle,
+        body: formBody,
+        buttons: []
+      };
+      
+      Array.from(buttonContainers).forEach((buttonContainer) => {
+        const buttonName = buttonContainer.querySelector('input[type="text"]').value;
+        const iconPath = buttonContainer.querySelector('input[type="text"][placeholder="Icon Path"]').value;
+        
+        const actionContainers = buttonContainer.getElementsByClassName('action-container');
+        const actions = Array.from(actionContainers).map((actionContainer) => {
+          const actionType = actionContainer.querySelector('select').value;
+          const actionValue = actionContainer.querySelector('input[type="text"]').value;
+          
+          return {
+            type: actionType,
+            value: actionValue
+          };
+        });
+        
+        const buttonData = {
+          button_name: buttonName,
+          icon: iconPath,
+          on_click: actions
+        };
+        
+        formData[formId].buttons.push(buttonData);
+      });
+      
+      console.log(JSON.stringify(formData, null, 2));
+      generatedJson = JSON.stringify(formData, null, 2); 
+      // Copy the generated JSON to clipboard or send it to the server
+      document.getElementById('generated-json').value = generatedJson;
+      document.getElementById('copy-button').disabled = false;
+      
+      // Reset the form
+      document.getElementById('form-builder').reset();
+      buttonsContainer.innerHTML = '';
+    });
+    
+    // Add event listener to the "Add Button" button
+    document.getElementById('add-button').addEventListener('click', addButton);
+  </script>
+</body>
+</html>
