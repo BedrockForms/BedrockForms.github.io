@@ -1,23 +1,39 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
   
-  h1 {
+  h2 {
     color: #333;
-    margin-bottom: 30px;
     text-align: center;
+    margin-top: 0;
+;
   }
-  
+
   form {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
-    padding: 20px;
+   padding-top: 20px;
+   padding-left: 50px;
+   padding-right: 50px;
+   padding-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .button-container input[type="text"] {
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    /* Add the desired width and height values */
+    width: 90%; /* Example: Set the width to 50% */
+    height: 15px; /* Example: Set the height to 30px */
   }
   
   label {
@@ -36,14 +52,29 @@ body {
   }
   
   .button-group {
+
+
+
     margin-top: 20px;
+  
   }
   
+  label[for="form-title"],
+  label[for="form-id"],
+  label[for="form-body"] {
+    margin-top: 20px;
+  }
+
+  
   .button-container {
+ 
     margin-bottom: 10px;
-    padding: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #bed2e2;
   }
   
   .button-container input,
@@ -55,8 +86,21 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    /* Add the desired width and height values */
+    width: 50%; /* Example: Set the width to 50% */
+    height: 39px; /* Example: Set the height to 30px */
   }
   
+  .action-container .remove-action {
+    padding: 8px 12px;
+    background-color: #f44336;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
   .button-container .icon-field {
     font-family: "Minecraft", sans-serif;
   }
@@ -65,10 +109,22 @@ body {
     margin-top: 5px;
     padding: 8px 12px;
     background-color: #4CAF50;
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     font-size: 14px;
+    cursor: pointer;
+  }
+
+  .button-container buttonr {
+    margin-top: -5px;
+    padding: 12px;
+    margin-right: 11px;
+    background-color: #bd2b2b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 10px;
     cursor: pointer;
   }
   
@@ -96,7 +152,7 @@ body {
     margin-left: 5px;
     padding: 8px 12px;
     background-color: #f44336;
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     font-size: 14px;
@@ -123,7 +179,9 @@ body {
 
 
   button[type="submit"] {
-    margin-top: 20px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
     padding: 10px 20px;
     background-color: #2196F3;
     color: #fff;
@@ -140,10 +198,12 @@ body {
   /* Additional styling for the site */
   
   button[type="button"] {
-    background-color: #ccc;
+    background-color: #95c5a1;
     color: #fff;
   }
-  
+
+
+
   button[type="button"]:hover {
     background-color: #aaa;
   }
