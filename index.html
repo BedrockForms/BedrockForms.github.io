@@ -3,21 +3,12 @@
 <head>
   <title>Minecraft Form Builder</title>
   <link rel="stylesheet" href="style.css">
-    <style>
-    .form-container {
-      max-width: 800px; 
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f0f0f0;
-      border-radius: 8px;
-    }
-  </style>
 </head>
-  
 <body>
-  <h1>Minecraft Form Builder</h1>
-  <div class="form-container">
+ 
+  
   <form id="form-builder">
+    <h2>Minecraft Form Builder</h2>
     <label for="form-title">Form Title:</label>
     <input type="text" id="form-title" required>
     
@@ -25,7 +16,7 @@
     <input type="text" id="form-id" required>
     
     <label for="form-body">Body Text:</label>
-    <textarea id="form-body" required></textarea>
+    <textarea id="form-body"></textarea>
     
     <div class="button-group">
       <h2>Buttons:</h2>
@@ -35,14 +26,15 @@
     
     <button type="submit">Create Minecraft Form</button>
   </form>
-</div>
+
   <div id="generated-json-container">
     <h2>Generated JSON:</h2>
     <textarea id="generated-json", rows="20" readonly></textarea>
+    <button id="copy-button">Copy to Clipboard</button>
   </div>
 
   <div class="content">
-    This website was created by Alexander aka. MiauMiez for <a href="https://axiscube.xyz/">AxiscubeXYZ</a>. 
+    This website was created by Alexander aka. MiauMiez for <a href="https://axiscube.xyz/">AxiscubeXYZ.</a>. Read the docs at <a href="https://easyform.axiscube.xyz/">EasyForm-Docs</a>
   </div>
   <footer class="footer"></footer>
 
@@ -98,8 +90,8 @@
       valueField.type = 'text';
       valueField.placeholder = 'Action Value';
       
-      const removeAction = document.createElement('button');
-      removeAction.textContent = 'Remove';
+      const removeAction = document.createElement('buttonr');
+      removeAction.textContent = 'X';
       removeAction.type = 'button';
       removeAction.addEventListener('click', () => {
         actionContainer.remove();
@@ -127,56 +119,82 @@
     
     // Handle form submission
     document.getElementById('form-builder').addEventListener('submit', (e) => {
-      e.preventDefault();
+  e.preventDefault();
+  
+  const formTitle = document.getElementById('form-title').value;
+  const formId = document.getElementById('form-id').value;
+  const formBody = document.getElementById('form-body').value;
+  
+  const buttonsContainer = document.getElementById('buttons-container');
+  const buttonContainers = buttonsContainer.getElementsByClassName('button-container');
+  
+  const formData = {};
+  formData[formId] = {
+    title: formTitle,
+    body: formBody,
+    buttons: []
+  };
+  
+  Array.from(buttonContainers).forEach((buttonContainer) => {
+    const buttonName = buttonContainer.querySelector('input[type="text"]').value;
+    const iconPath = buttonContainer.querySelector('input[type="text"][placeholder="Icon Path"]').value;  
+    const actionContainers = buttonContainer.getElementsByClassName('action-container');
+    
+    const actions = Array.from(actionContainers).map((actionContainer) => {
+      const actionType = actionContainer.querySelector('select').value;
+      const actionValue = actionContainer.querySelector('input[type="text"]').value;
       
-      const formTitle = document.getElementById('form-title').value;
-      const formId = document.getElementById('form-id').value;
-      const formBody = document.getElementById('form-body').value;
-      
-      const buttonsContainer = document.getElementById('buttons-container');
-      const buttonContainers = buttonsContainer.getElementsByClassName('button-container');
-      
-      const formData = {};
-      formData[formId] = {
-        title: formTitle,
-        body: formBody,
-        buttons: []
+      return {
+        type: actionType,
+        value: actionValue
       };
-      
-      Array.from(buttonContainers).forEach((buttonContainer) => {
-        const buttonName = buttonContainer.querySelector('input[type="text"]').value;
-        const iconPath = buttonContainer.querySelector('input[type="text"][placeholder="Icon Path"]').value;
-        
-        const actionContainers = buttonContainer.getElementsByClassName('action-container');
-        const actions = Array.from(actionContainers).map((actionContainer) => {
-          const actionType = actionContainer.querySelector('select').value;
-          const actionValue = actionContainer.querySelector('input[type="text"]').value;
-          
-          return {
-            type: actionType,
-            value: actionValue
-          };
-        });
-        
-        const buttonData = {
-          button_name: buttonName,
-          icon: iconPath,
-          on_click: actions
-        };
-        
-        formData[formId].buttons.push(buttonData);
-      });
-      
-      console.log(JSON.stringify(formData, null, 2));
-      generatedJson = JSON.stringify(formData, null, 2); 
-      // Copy the generated JSON to clipboard or send it to the server
-      document.getElementById('generated-json').value = generatedJson;
-      document.getElementById('copy-button').disabled = false;
-      
-      // Reset the form
-      document.getElementById('form-builder').reset();
-      buttonsContainer.innerHTML = '';
     });
+    
+    let buttonData;
+    
+    if (iconPath.trim() !== '') {
+      buttonData = {
+        button_name: buttonName,
+        icon: iconPath,
+        on_click: actions
+      };
+    } else {
+      buttonData = {
+        button_name: buttonName,
+        on_click: actions
+      };
+    }
+    
+    formData[formId].buttons.push(buttonData);
+  });
+  
+  console.log(JSON.stringify(formData, null, 2));
+  generatedJson = JSON.stringify(formData, null, 2); 
+  // Copy the generated JSON to clipboard or send it to the server
+  document.getElementById('generated-json').value = generatedJson;
+  document.getElementById('copy-button').disabled = false;
+  
+
+  document.getElementById('copy-button').addEventListener('click', () => {
+  
+
+  const textarea = document.getElementById('generated-json');
+  textarea.select();
+  document.execCommand('copy');
+  
+  // Clean up
+  document.body.removeChild(textarea);
+  
+  // Optionally, provide feedback to the user
+  alert('Text copied to clipboard!');
+});
+
+
+  // Reset the form
+ // document.getElementById('form-builder').reset();
+  //buttonsContainer.innerHTML = '';
+});
+
     
     // Add event listener to the "Add Button" button
     document.getElementById('add-button').addEventListener('click', addButton);
