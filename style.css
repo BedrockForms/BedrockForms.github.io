@@ -1,29 +1,28 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
   
-  h2 {
+h2 {
     color: #333;
     text-align: center;
     margin-top: 0;
-;
-  }
+}
 
-  form {
+form {
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
-   padding-top: 20px;
-   padding-left: 50px;
-   padding-right: 50px;
-   padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .button-container input[type="text"] {
+}
+.button-container input[type="text"] {
     display: block;
     margin-bottom: 5px;
     width: 100%;
@@ -34,40 +33,35 @@ body {
     /* Add the desired width and height values */
     width: 90%; /* Example: Set the width to 50% */
     height: 15px; /* Example: Set the height to 30px */
-  }
+}
   
-  label {
+label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
-  }
+}
   
-  input[type="text"],
-  textarea {
+input[type="text"],
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-  }
+}
   
   .button-group {
-
-
-
     margin-top: 20px;
-  
-  }
+}
   
   label[for="form-title"],
   label[for="form-id"],
   label[for="form-body"] {
     margin-top: 20px;
-  }
+}
 
   
-  .button-container {
- 
+.button-container {
     margin-bottom: 10px;
     padding-top: 10px;
     padding-left: 5px;
@@ -75,7 +69,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #bed2e2;
-  }
+}
   
   .button-container input,
   .button-container select {
@@ -89,9 +83,9 @@ body {
     /* Add the desired width and height values */
     width: 50%; /* Example: Set the width to 50% */
     height: 39px; /* Example: Set the height to 30px */
-  }
+}
   
-  .action-container .remove-action {
+.action-container .remove-action {
     padding: 8px 12px;
     background-color: #f44336;
     color: #000000;
@@ -99,24 +93,24 @@ body {
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-  }
+}
 
-  .button-container .icon-field {
+.button-container .icon-field {
     font-family: "Minecraft", sans-serif;
-  }
+}
   
-  .button-container button {
+.button-container button {
     margin-top: 5px;
     padding: 8px 12px;
-    background-color: #4CAF50;
+    background-color: #0f9a05;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-  }
+}
 
-  .button-container buttonr {
+.button-container buttonr {
     margin-top: -5px;
     padding: 12px;
     margin-right: 11px;
@@ -126,29 +120,29 @@ body {
     border-radius: 4px;
     font-size: 10px;
     cursor: pointer;
-  }
+}
   
-  .button-container button:hover {
-    background-color: #45a049;
-  }
+.button-container button:hover {
+    background-color: #0f9a05;
+}
   
-  .action-container {
+.action-container {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-  }
+}
   
-  .action-container select,
-  .action-container input {
+.action-container select,
+.action-container input {
     flex: 1;
     margin-right: 5px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-  }
+}
   
-  .action-container button {
+.action-container button {
     margin-left: 5px;
     padding: 8px 12px;
     background-color: #f44336;
@@ -157,55 +151,70 @@ body {
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-  }
+}
   
-  .action-container button:hover {
+.action-container button:hover {
     background-color: #d32f2f;
-  }
+}
   
 
-  html, body {
+html, body {
     height: 100%;
-  }
-  body {
+}
+
+body {
     display: flex;
     flex-direction: column;
-  }
-  .content {
+}
+
+.content {
     flex: 1 0 auto;
     padding-bottom: 30px;
     padding-top: 30px;
-  }
+}
 
 
-  button[type="submit"] {
+button[type="submit"] {
     display: block;
     margin: 0 auto;
     margin-top: 50px;
     padding: 10px 20px;
-    background-color: #2196F3;
+    background-color: #0f9a05;
     color: #fff;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-  }
+}
   
-  button[type="submit"]:hover {
-    background-color: #0e8ae6;
-  }
+button[type="submit"]:hover {
+    background-color: #0f9a05;
+}
   
   /* Additional styling for the site */
   
-  button[type="button"] {
-    background-color: #95c5a1;
+button[type="button"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #0f9a05;
     color: #fff;
-  }
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
 
 
-  button[type="button"]:hover {
+button[type="button"]:hover {
     background-color: #aaa;
+}
+
+  #generated-json {
+    background-color: #333;
+    color:#ccc;
+    font-family: monospace;
   }
   
   .icon-field {
@@ -216,4 +225,3 @@ body {
     margin-top: 20px;
     margin-bottom: 10px;
   }
-  
